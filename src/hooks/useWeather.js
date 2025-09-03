@@ -26,10 +26,80 @@ export const useWeather = () => {
   // State for error handling
   const [error, setError] = useState(null);
 
+  // Function to fetch weather data by city name
+  const fetchWeatherByCity = async (cityName) => {
+    try {
+      console.log('Fetching weather data for city:', cityName);
+      // Set loading state
+      setLoading({
+        ...loading,
+        state: true,
+        message: "Searching for location...",
+      });
+
+      // Fetch data from OpenWeatherMap API using city name
+      const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(cityName)}&appid=${
+        import.meta.env.VITE_WEATHER_API_key
+      }&units=metric`;
+      console.log('Search API URL:', apiUrl);
+
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          throw new Error(`Location "${cityName}" not found. Please check the spelling and try again.`);
+        }
+        throw new Error(`API Error: ${response.status} - ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      console.log('Search API Response:', data);
+
+      // Check if we have valid weather data
+      if (!data || !data.main) {
+        throw new Error('Invalid weather data received from API');
+      }
+
+      // Update weather data state
+      const updateWeatherData = {
+        ...weatherData,
+        location: data?.name || "Unknown Location",
+        climate: data?.weather?.[0]?.main || "Unknown",
+        temperature: data?.main?.temp || null,
+        maxTemperature: data?.main?.temp_max || null,
+        minTemperature: data?.main?.temp_min || null,
+        humidity: data?.main?.humidity || null,
+        cloudPercentage: data?.clouds?.all || null,
+        wind: data?.wind?.speed || null,
+        time: data?.dt || null,
+        longitude: data?.coord?.lon || "",
+        latitude: data?.coord?.lat || "",
+      };
+
+      console.log('Updating weather data from search:', updateWeatherData);
+      setWeatherData(updateWeatherData);
+
+      // Set loading to false after successful data fetch
+      setLoading({
+        state: false,
+        message: "",
+      });
+
+      console.log('Weather search completed successfully');
+    } catch (error) {
+      console.error('Error searching weather data:', error);
+      setError(error.message || 'Failed to search weather data');
+      setLoading({
+        state: false,
+        message: "",
+      });
+    }
+  };
+  
   // Function to fetch weather data from API
   const fetchWeatherData = async (latitude, longitude) => {
     try {
-      console.log('Fetching weather data for:', latitude, longitude);
       // Set loading state
       setLoading({
         ...loading,
@@ -130,10 +200,11 @@ export const useWeather = () => {
     }
   }, []);
 
-  // Return weather data, error, and loading state
+  // Return weather data, error, loading state, and search function
   return {
     weatherData,
     error,
     loading,
+    fetchWeatherByCity,
   };
 };
