@@ -1,6 +1,7 @@
 import WeatherBoard from "./components/weather/WeatherBoard";
 import { FavouriteProvider, WeatherProvider } from "./provider";
 
+// Main App component that wraps the entire application
 function App() {
   return (
     <WeatherProvider>
