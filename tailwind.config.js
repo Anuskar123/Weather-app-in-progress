@@ -2,10 +2,20 @@
 // Export Tailwind CSS configuration
 export default {
   // Specify files to scan for classes
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   // Theme extensions
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif'],
+      },
+      colors: {
+        'light': '#ffffff',
+      },
+    },
   },
   // Plugins array
   plugins: [],

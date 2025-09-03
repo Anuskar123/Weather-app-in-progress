@@ -23,51 +23,43 @@ const WeatherCondition = () => {
   } = weatherData;
 
   return (
-    // Main container
     <div>
-      // Climate description
       <p className='text-sm lg:text-lg font-bold uppercase mb-8'>
-        thunderstorm with light {climate}
+        {climate ? `Weather: ${climate}` : "Loading weather data..."}
       </p>
-      // List of weather conditions
       <ul className='space-y-6 lg:space-y-6'>
-        // Max temperature
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
           <span>Temp max</span>
           <div className='inline-flex space-x-4'>
-            <p>{maxTemperature}°</p>
+            <p>{maxTemperature !== null ? `${maxTemperature}°` : "--°"}</p>
             <img src={temp_max} alt='temp-max' />
           </div>
         </li>
-        // Min temperature
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
           <span>Temp min</span>
           <div className='inline-flex space-x-4'>
-            <p>{minTemperature}°</p>
+            <p>{minTemperature !== null ? `${minTemperature}°` : "--°"}</p>
             <img src={temp_min} alt='temp-min' />
           </div>
         </li>
-        // Humidity
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
           <span>Humadity</span>
           <div className='inline-flex space-x-4'>
-            <p>{humidity}%</p>
+            <p>{humidity !== null ? `${humidity}%` : "--%"}</p>
             <img src={humadityImg} alt='humidity' />
           </div>
         </li>
-        // Cloud percentage
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
           <span>Cloudy</span>
           <div className='inline-flex space-x-4'>
-            <p>{cloudPercentage}%</p>
+            <p>{cloudPercentage !== null ? `${cloudPercentage}%` : "--%"}</p>
             <img src={cloud} alt='cloudy' />
           </div>
         </li>
-        // Wind speed
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
           <span>Wind</span>
           <div className='inline-flex space-x-4'>
-            <p>{wind}km/h</p>
+            <p>{wind !== null ? `${wind} km/h` : "-- km/h"}</p>
             <img src={windImg} alt='wind' />
           </div>
         </li>

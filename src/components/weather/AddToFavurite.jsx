@@ -36,17 +36,13 @@ const AddToFavourite = () => {
   };
 
   return (
-    // Container for the button
     <div className='md:col-span-2'>
       <div className='flex items-center justify-end space-x-6'>
-        // Button to toggle favorite status
         <button
-          onClick={handleFavourites} // Corrected onClick handler
+          onClick={handleFavourites}
           className='text-sm md:text-base inline-flex items-center space-x-2 px-3 py-1.5 rounded-md bg-[#C5C5C54D]'
         >
-          // Button text
           <span>Add to Favourite</span>
-          // Heart icon based on favorite status
           <img src={isFavourite ? RedHeartIcon : HeartIcon} alt='' />
         </button>
       </div>
