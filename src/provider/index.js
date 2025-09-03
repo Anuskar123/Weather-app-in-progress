@@ -1,2 +1,6 @@
-export { FavouriteProvider } from "./FavouriteProvider";
-export { WeatherProvider } from "./WeatherProvider";
+// Import provider components
+import WeatherProvider from "./WeatherProvider";
+import FavouriteProvider from "./FavouriteProvider";
+
+// Export the providers
+export { WeatherProvider, FavouriteProvider };

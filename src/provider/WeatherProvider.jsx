@@ -1,24 +1,19 @@
-import { createContext, useState } from "react";
+// Import WeatherContext
+import { WeatherContext } from "../context";
+// Import useWeather hook
+import { useWeather } from "../hooks/useWeather";
 
-export const WeatherContext = createContext();
-
-export const WeatherProvider = ({ children }) => {
-  const [weatherData, setWeatherData] = useState({
-    location: "Kathmandu",
-    temperature: 25,
-    condition: "Clear Sky",
-    humidity: 60,
-    windSpeed: 5,
-    visibility: 10,
-  });
-
-  const updateWeather = (data) => {
-    setWeatherData(data);
-  };
-
+// WeatherProvider component to provide weather context to children
+const WeatherProvider = ({ children }) => {
+  // Get weather data from custom hook
+  const { weatherData, error, loading } = useWeather();
   return (
-    <WeatherContext.Provider value={{ weatherData, updateWeather }}>
+    // Provide weather data to child components
+    <WeatherContext.Provider value={{ weatherData, error, loading }}>
       {children}
     </WeatherContext.Provider>
   );
 };
+
+// Export WeatherProvider
+export default WeatherProvider;

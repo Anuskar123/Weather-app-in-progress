@@ -1,43 +1,27 @@
 # Weather App
 
-A modern, responsive weather application built with React and Vite. Get real-time weather information for any location, save your favorite cities, and enjoy a beautiful UI with dynamic backgrounds.
+A React-based weather application built with Vite, featuring real-time weather data, location-based forecasts, and favorite locations management.
 
 ## Features
 
-- 🌤️ Real-time weather data
-- 🔍 Search for any city
-- ❤️ Add cities to favorites
-- 📱 Responsive design
-- 🎨 Dynamic backgrounds based on weather
-- ⚡ Fast and lightweight with Vite
+- Real-time weather data from OpenWeatherMap API
+- Location-based weather detection
+- Favorite locations management
+- Responsive design with Tailwind CSS
+- Modern React hooks and context for state management
 
-## Technologies Used
+## Tech Stack
 
-- React
+- React 18
 - Vite
 - Tailwind CSS
 - OpenWeatherMap API
 
-## Getting Started
+# React + Vite
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Get an API key from [OpenWeatherMap](https://openweathermap.org/api)
-4. Create a `.env` file and add your API key: `VITE_WEATHER_API_KEY=your_api_key`
-5. Run the development server: `npm run dev`
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Deployment
+Currently, two official plugins are available:
 
-This app is deployed on GitHub Pages. To deploy your own version:
-
-1. Push to GitHub
-2. Enable GitHub Pages in repository settings
-3. The deployment workflow will handle the rest
-
-## Author
-
-Anuskar Sigdel
-
-## License
-
-MIT
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

@@ -1,37 +1,80 @@
+// Import weather condition icons
+import temp_max from "../../assets/icons/temp-max.svg";
+import temp_min from "../../assets/icons/temp-min.svg";
+import humadityImg from "../../assets/icons/humidity.svg";
+import cloud from "../../assets/icons/cloud.svg";
+import windImg from "../../assets/icons/wind.svg";
+// Import useContext hook
 import { useContext } from "react";
+// Import WeatherContext
 import { WeatherContext } from "../../context";
 
+// WeatherCondition component to display detailed weather conditions
 const WeatherCondition = () => {
+  // Get weather data from context
   const { weatherData } = useContext(WeatherContext);
-  const { humidity, windSpeed, visibility } = weatherData || {};
+  const {
+    climate,
+    maxTemperature,
+    minTemperature,
+    humidity,
+    cloudPercentage,
+    wind,
+  } = weatherData;
 
   return (
-    <div className='pt-12 pb-6'>
+    // Main container
+    <div>
+      // Climate description
       <p className='text-sm lg:text-lg font-bold uppercase mb-8'>
-        Today's Forecast
+        thunderstorm with light {climate}
       </p>
+      // List of weather conditions
       <ul className='space-y-6 lg:space-y-6'>
+        // Max temperature
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
+          <span>Temp max</span>
           <div className='inline-flex space-x-4'>
-            <p>Humidity</p>
+            <p>{maxTemperature}°</p>
+            <img src={temp_max} alt='temp-max' />
           </div>
-          <p>{humidity || "60"}%</p>
         </li>
+        // Min temperature
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
+          <span>Temp min</span>
           <div className='inline-flex space-x-4'>
-            <p>Wind Speed</p>
+            <p>{minTemperature}°</p>
+            <img src={temp_min} alt='temp-min' />
           </div>
-          <p>{windSpeed || "5"} km/h</p>
         </li>
+        // Humidity
         <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
+          <span>Humadity</span>
           <div className='inline-flex space-x-4'>
-            <p>Visibility</p>
+            <p>{humidity}%</p>
+            <img src={humadityImg} alt='humidity' />
           </div>
-          <p>{visibility || "10"} km</p>
+        </li>
+        // Cloud percentage
+        <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
+          <span>Cloudy</span>
+          <div className='inline-flex space-x-4'>
+            <p>{cloudPercentage}%</p>
+            <img src={cloud} alt='cloudy' />
+          </div>
+        </li>
+        // Wind speed
+        <li className='text-sm lg:text-lg flex items-center justify-between space-x-4'>
+          <span>Wind</span>
+          <div className='inline-flex space-x-4'>
+            <p>{wind}km/h</p>
+            <img src={windImg} alt='wind' />
+          </div>
         </li>
       </ul>
     </div>
   );
 };
 
+// Export WeatherCondition component
 export default WeatherCondition;

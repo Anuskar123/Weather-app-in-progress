@@ -1,23 +1,42 @@
-import { createContext, useState } from "react";
+// Import FavouriteContext
+import { FavouriteContext } from "../context";
+// Import useLocalStroage hook
+import useLocalStroage from "../hooks/useLocalStroag";
 
-export const FavouriteContext = createContext();
+// FavouriteProvider component to manage favorite locations
+const FavouriteProvider = ({ children }) => {
+  // State for favorites using localStorage
+  const [favourites, setFavourites] = useLocalStroage("favourite", []);
 
-export const FavouriteProvider = ({ children }) => {
-  const [favourites, setFavourites] = useState([]);
-
-  const addToFavourites = (location) => {
-    if (!favourites.includes(location)) {
-      setFavourites([...favourites, location]);
-    }
+  // Function to add location to favorites
+  const AddToFavurites = (latitude, longitude, location) => {
+    setFavourites([
+      ...favourites,
+      {
+        latitude: latitude,
+        longitude: longitude,
+        location: location,
+      },
+    ]);
   };
 
-  const removeFromFavourites = (location) => {
-    setFavourites(favourites.filter((fav) => fav !== location));
+  // Function to remove location from favorites
+  const removeFromFavouriteItems = (location) => {
+    const restFavourites = favourites.filter(
+      (fav) => fav.location !== location
+    );
+    setFavourites(restFavourites);
   };
 
   return (
-    <FavouriteContext.Provider value={{ favourites, addToFavourites, removeFromFavourites }}>
+    // Provide favorites functions and data to children
+    <FavouriteContext.Provider
+      value={{ AddToFavurites, removeFromFavouriteItems, favourites }}
+    >
       {children}
     </FavouriteContext.Provider>
   );
 };
+
+// Export FavouriteProvider
+export default FavouriteProvider;

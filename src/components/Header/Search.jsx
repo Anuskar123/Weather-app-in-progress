@@ -1,38 +1,28 @@
-import { useState } from "react";
-import { MdOutlineLocationOn } from "react-icons/md";
-import { IoMdSearch } from "react-icons/io";
+// Import search icon asset
+import search from "../../assets/search.svg";
 
+// Search component for location input
 const Search = () => {
-  const [city, setCity] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(city);
-  };
-
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='h-16 bg-black/30 w-full max-w-[450px] rounded-full backdrop-blur-[32px] mb-8'
-    >
-      <div className='h-full relative flex items-center justify-between p-2'>
-        <MdOutlineLocationOn className='text-white text-xl' />
+    // Form for search functionality
+    <form action='#'>
+      // Container with styling for focus states
+      <div className='flex items-center space-x-2 py-2 px-3 group focus-within:bg-black/30 transition-all border-b border-white/50 focus-within:border-b-0 focus-within:rounded-md'>
+        // Input field for search query
         <input
-          type='text'
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          placeholder='Search for city...'
-          className='flex-1 bg-transparent outline-none placeholder:text-white text-white text-[15px] font-light pl-6 h-full'
+          className='bg-transparent  placeholder:text-white text-white w-full text-xs md:text-base outline-none border-none'
+          type='search'
+          placeholder='Search Location'
+          required
         />
-        <button
-          type='submit'
-          className='bg-[#1ab8ed] hover:bg-[#15abdd] w-20 h-12 rounded-full flex justify-center items-center transition'
-        >
-          <IoMdSearch className='text-2xl text-white' />
+        // Submit button with search icon
+        <button type='submit'>
+          <img src={search} />
         </button>
       </div>
     </form>
   );
 };
 
+// Export Search component
 export default Search;
